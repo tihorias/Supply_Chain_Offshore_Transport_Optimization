@@ -1,15 +1,5 @@
-# Multi-modal Transportation Optimization
+# Supply Chain Offshore Transport Optimization
 A project on using mathematical programming to solve multi-modal transportation cost minimization in goods delivery and supply chain management.
-## Catalogue
-[**Project Overview**](https://github.com/hzjken/multimodal-transportation-optimization/#project-overview)<br>
-[**Problem Statement**](https://github.com/hzjken/multimodal-transportation-optimization/#problem-statement)<br>
-[**Assumptions**](https://github.com/hzjken/multimodal-transportation-optimization/#assumptions)<br>
-[**Dimension & Matrixing**](https://github.com/hzjken/multimodal-transportation-optimization/#dimension--matrixing)<br>
-[**Decision Variables**](https://github.com/hzjken/multimodal-transportation-optimization/#decision-variables)<br>
-[**Parameters**](https://github.com/hzjken/multimodal-transportation-optimization/#parameters)<br>
-[**Mathematical Modelling**](https://github.com/hzjken/multimodal-transportation-optimization/#mathematical-modelling)<br>
-[**Optimization Result & Solution**](https://github.com/hzjken/multimodal-transportation-optimization/#optimization-result--solution)<br>
-[**Model Use & Extension Guide**](https://github.com/hzjken/multimodal-transportation-optimization/#model-use--extension-guide)
 
 ## Project Overview
 In delivery services, many different transportation tools such as trucks, airplanes and ships are available. Different choices of routes and transporation tools will lead to different costs. To minimize cost, we should consider goods consolidation (Occassions when different goods share a journey together.), different transportation costs and delivery time constraints etc. This project uses mathematical programming to model such situation and solves for overall cost minimization solution. The model construction offers options of two mathematical programming frameworks, **DOcplex** and **CVXPY**.
@@ -22,7 +12,6 @@ In delivery services, many different transportation tools such as trucks, airpla
 In our simulated case, there are 8 goods, 4 cities/countries (Shanghai, Wuxi, Singapore, Malaysia), 16 ports and 4 transportation tools. The 8 goods originate from different cities and have different destinations. Each city/country has 4 ports, the airport, railway station, seaport and warehouse. There are in total 50 direct routes connecting different ports. Each route has a specific transportation tool, transportation cost, transit time and weekly schedule. Warehouse in each city allows goods to be deposited for a period of time so as to fit certain transportation schedules or wait for other goods to be transported together. All goods might have different order dates and different delivery deadlines. With all these criteria, how can we find out solution routes for all goods that minimize the overall cost? 
 
 <p align="center"><img  height="320" src="https://user-images.githubusercontent.com/30411828/45705624-a44bcc00-bbac-11e8-8548-d8181d9fd848.png"></p>
-<p align="center">(The above diagram is only used to show the basic idea of the problem, the routes are not complete.)</p>
 
 ## Assumptions
 Before model building, some assumptions should be made to simplify the case because real-world delivery problems consist of too many unmeasurable factors that can affect the delivery process and final outcomes. Here are the main assumptions:<br>
@@ -202,9 +191,3 @@ model.add_constraints(np.sum(arrTime[:,DestinationPort[k],:,k]) <= kDDL[k] for k
 ## Optimization Result & Solution
 With the objective & constraints built, the model is now complete! To make users understand the result easier, we process it with the function **txt_solution()** and save it into a text file [**Solution.txt**](https://github.com/hzjken/multimodal-transportation-optimization/blob/master/Solution.txt). The minimized cost value as well as optimal routes for all goods are presented in it. 
 
-## Model Use & Extension Guide
-Now that you know about all the details of the model, if you want to use it, just download the [**multi-modal transportation.py**](https://github.com/hzjken/multimodal-transportation-optimization/blob/master/multi-modal%20transportation.py) & [**model data.xlsx**](https://github.com/hzjken/multimodal-transportation-optimization/blob/master/model%20data.xlsx) in this repo. You can reset all the parameters' data in the excel file to fit your own case. After that, just run the python file and your **Solution.txt** will be generated!
-
-The code is written in OOP format, so you can easily modify or extend the **class MMT** to fit cases of more complex situations. You can also try modifying the assumptions such as making it to be a stochastic optimization problem or so on.
-
-Finally, hope this long documentation helps, and thanks all my MSBA teammates (**Derek, Teng Lei, Max, Veronica, Sophia**) for the help and contributions in this project!
